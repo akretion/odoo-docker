@@ -68,10 +68,6 @@ pyinotify==0.9.6
 simplejson==3.17.0
 urllib3==1.26.7
 
-# Migration tools
-marabunta==0.10.6
-anthem==0.13.0
-
 # test / lint
 # those libs and their dependencies are unpinned
 # to always test with the last version of it
