@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+cd /odoo
+
+ak build -c odoo-spec.yaml -f odoo-frozen.yaml
+# Clean useless file
+
+# First we only keep wanted odoo module
+rm -rf /odoo/src/.git
+cp -r -L /odoo/links /odoo/odoo-addons
+rm -rf /odoo/src/addons/*
+mv /odoo/odoo-addons/* /odoo/src/addons
+
+# Secondly we remove unwanted lang
+if [[ BUILD_RESTRICT_LANG ]]
+then
+    find /odoo/src/ -name *.po ! -name $BUILD_RESTRICT_LANG -type f -exec rm -v {} +
+fi

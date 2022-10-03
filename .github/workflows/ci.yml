@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 4 * * 0"
+
+jobs:
+  build-odoo:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - ODOOVERSION: "14.0"
+          - ODOOVERSION: "16.0"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to ghcr.io
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ${{ matrix.ODOOVERSION }}/Dockerfile
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ matrix.ODOOVERSION }}-latest
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:${{ matrix.ODOOVERSION }}-latest
+          cache-to: type=inline
+          push: true

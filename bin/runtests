@@ -1,0 +1,9 @@
+#!/bin/bash
+ADDONS_TEST=$(manifestoo --select-exclude ${EXCLUDE_MODULES:-none} --select-addons-dir /odoo/local-src list --separator=,)
+# Move to shared folder so coverage file will be shared with the host
+# and so accessible by the gitlab runner
+cd /shared
+unbuffer coverage run --include "/odoo/local-src/*" --branch /usr/local/bin/odoo --stop-after-init -i ${ADDONS_TEST} --test-enable --worker=0
+ls -al *
+coverage report
+coverage xml

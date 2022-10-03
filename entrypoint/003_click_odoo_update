@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "START UPDATING USING CLICK ODOO"
+click-odoo-update --i18n-overwrite

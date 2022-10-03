@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+python3 -m pip install pipx
+
+# Install cli for all user
+export PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin
+
+pipx install git+https://github.com/akretion/ak --force --include-deps
+pipx inject ak git-aggregator --force
+pipx install git-autoshare
+
+pipx install manifestoo
+pipx install coverage
+
+git config --global user.email "bot@akretion.com"
+git config --global user.name "Bot"

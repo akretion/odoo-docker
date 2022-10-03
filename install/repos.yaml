@@ -1,0 +1,8 @@
+github.com:
+  "*":
+    orgs:
+      - odoo
+      - OCA
+      - acsone
+      - akretion
+      - camptocamp
