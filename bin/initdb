@@ -3,7 +3,7 @@ set -euxo pipefail
 
 echo "Create database $1"
 
-EXTRA_ARGS=""
+EXTRA_ARGS="${@:2}"
 ADDONS_INIT=$(manifestoo --select-exclude ${EXCLUDE_MODULES:-none} --select-addons-dir /odoo/local-src list-depends --separator=,)
 
 # Some module like product_code_unique can break the installation if their are installed too early, so you can use the variable "EXCLUDE_DEPENDENCIES" to exclude them
