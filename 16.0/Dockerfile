@@ -25,7 +25,8 @@ ENV BUILD_PACKAGE \
     libpq-dev \
     libmupdf-dev \
     mupdf-tools \
-    mupdf
+    mupdf \
+    expect
 
 # recreate isolate env
 RUN set -x \
