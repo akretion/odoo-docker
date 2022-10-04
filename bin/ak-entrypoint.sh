@@ -1,5 +1,4 @@
 #!/bin/bash
-set -Eeuo pipefail
 
 USER_ID=${LOCAL_USER_ID:-999}
 
@@ -19,4 +18,7 @@ if [ -z "$(pip list --format=columns | grep "/odoo/src")" ]; then
   chown -R $USER_ID:$USER_ID /odoo/src/*.egg-info
 fi
 
+# Do not block the entrypoint if the pip install fail (only local case)
+# so we only exist if fail after the pip install
+set -Eeuo pipefail
 /usr/local/bin/entrypoint.sh "$@"
