@@ -61,4 +61,4 @@ COPY bin/* /usr/local/bin/
 # customize entrypoint
 
 ENTRYPOINT ["/usr/local/bin/ak-entrypoint.sh"]
-
+CMD ["odoo"]
