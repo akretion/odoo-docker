@@ -22,6 +22,7 @@ ENV BUILD_PACKAGE \
 # Additionnal dep from Ak
     #vim \
     po4a \
+    postgresql-client \
     libpq-dev \
     libmupdf-dev \
     mupdf-tools \
