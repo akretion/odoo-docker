@@ -2,6 +2,18 @@
 
 USER_ID=${LOCAL_USER_ID:-999}
 
+
+# When using docky open the entrypoint is not run
+# this mean we do not have the variable mapping from odoo db variable => postgres variable
+# as we need to have the postgres always set we use it in docker-compose file and map them to odoo variable
+
+export DB_HOST=${PGHOST}
+export DB_PORT=${PGPORT:-5432}
+export DB_USER=${PGUSER}
+export DB_PASSWORD=${PGPASSWORD}
+export DB_NAME=${PGDATABASE}
+
+
 if [ -z "$(pip list --format=columns | grep "/odoo/src")" ]; then
   # The build runs 'pip install -e' on the odoo src, which creates an
   # odoo.egg-info directory *inside /odoo/src*. So when we run a container
