@@ -46,10 +46,6 @@ RUN pip install --no-cache-dir -r /tmp/base_requirements.txt
 COPY 16.0/ak_requirements.txt /tmp/ak_requirements.txt
 RUN pip install --no-cache-dir -r /tmp/ak_requirements.txt
 
-COPY entrypoint/002_check_pending_jobs /start-entrypoint.d/002_check_pending_jobs
-COPY entrypoint/003_click_odoo_update /start-entrypoint.d/003_click_odoo_update
-RUN chmod 655 /start-entrypoint.d/*
-
 ENV ADDONS_PATH=/odoo/src/addons,/odoo/local-src,/odoo/links
 
 COPY install/* /install/
