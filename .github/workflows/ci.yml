@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         include:
+          - ODOOVERSION: "12.0"
           - ODOOVERSION: "14.0"
           - ODOOVERSION: "16.0"
     steps:
