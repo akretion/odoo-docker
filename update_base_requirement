@@ -4,6 +4,9 @@ set -Eeuo pipefail
 rm -rf 16.0/base_requirements.txt
 wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/16.0/base_requirements.txt -O 16.0/base_requirements.txt
 
+rm -rf 15.0/base_requirements.txt
+wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/15.0/base_requirements.txt -O 15.0/base_requirements.txt
+
 rm -rf 14.0/base_requirements.txt
 wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/14.0/base_requirements.txt -O 14.0/base_requirements.txt
 
