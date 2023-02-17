@@ -1,6 +1,0 @@
-#!/bin/bash
-set -euxo pipefail
-
-echo "Create database $1"
-
-click-odoo-initdb -n $1 -m $(manifestoo --select-addons-dir . list-depends --separator=,)

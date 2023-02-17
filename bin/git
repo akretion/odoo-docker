@@ -1,9 +1,0 @@
-#!/bin/bash
-if [ "$1" == "clone" ]
-then
-    shift
-    echo "============ USE GIT AUTOSHARE =========="
-    /usr/bin/git autoshare-clone "$@"
-else
-    /usr/bin/git "$@"
-fi

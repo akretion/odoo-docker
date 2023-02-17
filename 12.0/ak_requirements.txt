@@ -1,4 +1,0 @@
-click-odoo-contrib>=1.16.0
-sentry_sdk>=1.9.9
-git+https://github.com/oca/openupgradelib.git@master
-odoo_test_helper==2.0.2
