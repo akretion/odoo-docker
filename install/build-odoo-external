@@ -1,6 +1,9 @@
 #!/bin/bash
 set -ex
 cd /odoo
+# Ak clone + ak spare will only retrieve the wanted directory
+ak clone
+ak spare
 ak build
 # clean useless file
 cd /odoo/external-src
