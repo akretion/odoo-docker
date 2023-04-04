@@ -27,7 +27,8 @@ ENV BUILD_PACKAGE \
     libmupdf-dev \
     mupdf-tools \
     mupdf \
-    expect
+    expect \
+    openssh-client
 
 # recreate isolate env
 RUN set -x \
