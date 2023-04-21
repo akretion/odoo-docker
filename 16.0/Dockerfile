@@ -1,4 +1,5 @@
-FROM ghcr.io/acsone/odoo-bedrock:16.0-py39-latest
+# python 3.10 is the default used in acsone
+FROM ghcr.io/acsone/odoo-bedrock:16.0-py310-latest
 MAINTAINER Akretion
 
 # syntax = docker/dockerfile:1.4
@@ -7,7 +8,7 @@ MAINTAINER Akretion
 ENV BUILD_PACKAGE \
     build-essential \
     gcc \
-    python3.9-dev \
+    python3.10-dev \
     libevent-dev \
     libfreetype6-dev \
     libxml2-dev \
@@ -32,7 +33,7 @@ ENV BUILD_PACKAGE \
 # recreate isolate env
 RUN set -x \
   && rm -rf /odoo/bin \
-  && python3.9 -m venv /env \
+  && python3.10 -m venv /env \
   && /env/bin/pip install -U pip wheel setuptools
 ENV PATH=/env/bin:$PATH
 

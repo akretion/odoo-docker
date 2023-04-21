@@ -13,5 +13,4 @@ wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/14.
 rm -rf 12.0/base_requirements.txt
 wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/12.0/base_requirements.txt -O 12.0/base_requirements.txt
 
-
 echo "File have been updated from C2C project, please check it 'git diff' and remove marabunta/anthem tools"
