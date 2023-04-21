@@ -1,4 +1,5 @@
-FROM ghcr.io/acsone/odoo-bedrock:16.0-py39-latest
+# python 3.10 is the default used in acsone
+FROM ghcr.io/acsone/odoo-bedrock:16.0-py310-latest
 MAINTAINER Akretion
 
 # syntax = docker/dockerfile:1.4
