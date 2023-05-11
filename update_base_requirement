@@ -10,6 +10,9 @@ wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/15.
 rm -rf 14.0/base_requirements.txt
 wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/14.0/base_requirements.txt -O 14.0/base_requirements.txt
 
+rm -rf 13.0/base_requirements.txt
+wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/12.0/base_requirements.txt -O 13.0/base_requirements.txt
+
 rm -rf 12.0/base_requirements.txt
 wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/12.0/base_requirements.txt -O 12.0/base_requirements.txt
 
