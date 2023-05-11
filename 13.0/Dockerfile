@@ -34,7 +34,7 @@ ENV BUILD_PACKAGE \
 RUN set -x \
   && rm -rf /odoo/bin \
   && python3.7 -m venv /env \
-  && /env/bin/pip install -U pip wheel setuptools
+  && /env/bin/pip install -U pip wheel setuptools==58
 ENV PATH=/env/bin:$PATH
 
 RUN --mount=type=cache,target=/var/cache/apt \
