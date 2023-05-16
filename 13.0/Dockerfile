@@ -37,6 +37,14 @@ RUN set -x \
   && /env/bin/pip install -U pip wheel setuptools==58
 ENV PATH=/env/bin:$PATH
 
+# Install add-apt-repository command
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update \
+    && apt-get install -y --no-install-recommends software-properties-common
+
+# Allow to use latest git in ubuntu 18.04
+RUN add-apt-repository ppa:git-core/ppa
+
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update \
     && apt-get install -y --no-install-recommends $BUILD_PACKAGE
