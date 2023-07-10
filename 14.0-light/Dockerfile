@@ -1,11 +1,11 @@
-# python 3.10 is the default used in acsone
-FROM ghcr.io/acsone/odoo-bedrock:16.0-py310-latest
-ARG PYTHONBIN=python3.10
+# python 3.9 is the default used in acsone
+FROM ghcr.io/acsone/odoo-bedrock:14.0-py39-latest
+ARG PYTHONBIN=python3.9
 MAINTAINER Akretion
 
 # syntax = docker/dockerfile:1.4
 
-# List from https://github.com/camptocamp/docker-odoo-project/blob/master/16.0/Dockerfile
+# List from https://github.com/camptocamp/docker-odoo-project/blob/master/14.0/Dockerfile
 ENV BUILD_PACKAGE \
     build-essential \
     gcc \
@@ -30,10 +30,10 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update \
     && apt-get install -y --no-install-recommends $BUILD_PACKAGE
 
-COPY 16.0/base_requirements.txt /tmp/base_requirements.txt
+COPY 14.0/base_requirements.txt /tmp/base_requirements.txt
 RUN pip install --no-cache-dir -r /tmp/base_requirements.txt
 
-COPY 16.0-light/ak_requirements.txt /tmp/ak_requirements.txt
+COPY 14.0-light/ak_requirements.txt /tmp/ak_requirements.txt
 RUN pip install --no-cache-dir -r /tmp/ak_requirements.txt
 
 CMD ["odoo"]
