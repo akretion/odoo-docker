@@ -7,7 +7,7 @@ MAINTAINER Akretion
 ENV BUILD_PACKAGE \
     build-essential \
     gcc \
-    python3.7-dev \
+    python3.8-dev \
     libevent-dev \
     libfreetype6-dev \
     libxml2-dev \
@@ -33,7 +33,7 @@ ENV BUILD_PACKAGE \
 # recreate isolate env
 RUN set -x \
   && rm -rf /odoo/bin \
-  && python3.7 -m venv /env \
+  && python3.8 -m venv /env \
   && /env/bin/pip install -U pip wheel setuptools
 ENV PATH=/env/bin:$PATH
 
