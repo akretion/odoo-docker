@@ -29,3 +29,15 @@ It have exactly the same behaviour but with two new features
   are always run
 - for the module custom_all you can add "before.sql" script and the request will be run before
   the update of module
+
+
+initdb
+~~~~~~~
+
+This script is used to create a database from scratch, with cache based on click-odoo-initdb
+
+
+runtests
+~~~~~~~~~
+
+This script is used to execute the custom test on the ci
