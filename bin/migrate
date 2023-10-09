@@ -59,7 +59,7 @@ def get_before_request(cr):
     current_version = cr.fetchone()
     if not current_version:
         _logger.error("No version found for custom_all, skip begin script")
-    current_version = get_version_last_digit(current_version[0])
+    current_version = current_version[0]
     migr_path = "/odoo/local-src/custom_all/migrations"
     if os.path.exists(migr_path):
         for version in os.listdir(migr_path):
