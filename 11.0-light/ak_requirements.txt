@@ -1,0 +1,2 @@
+click-odoo-contrib>=1.16.0
+git+https://github.com/oca/openupgradelib.git@master
