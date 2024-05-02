@@ -1,73 +1,75 @@
 #!/usr/bin/env python3
 # pylint: disable=print-used
 
-from click_odoo_contrib.update import main
-from odoo.modules.migration import MigrationManager
-from odoo.modules.registry import Registry
-from odoo import sql_db
-from datetime import datetime
-import os
 import logging
+import os
+
+from click_odoo_contrib.update import main
+
+from odoo import release, sql_db
+from odoo.modules import module
+from odoo.modules.registry import Registry
 
 _logger = logging.getLogger(__name__)
 
+TOP_MODULE_PATH = "/odoo/local-src/custom_all"
 
-def get_version_last_digit(version):
-    return ".".join(version.split(".")[-3:])
+FAKE_VERSION = f"{release.major_version}.9999.9.9"
 
-def get_new_version(current_version):
-    version = datetime.now().strftime("%y%m.%d.0")
-    # increment last digit if needed
-    if current_version >= version:
-        year_month, day, inc = current_version.split(".")
-        inc = str(int(inc) + 1)
-        version = ".".join([year_month, day, inc])
-    return version
-
-# Patch odoo native migration manager to always run migration script in the
-# directory "migrations/0.0.0"
-# Indeed odoo will only run the migration script if the version have been bump
-# inside the module.
-# So if an migration directory 0.0.0 exist "dynamically" increment the version
-# for odoo/local-src modules
-
-def have_pending_migration(self, pkg):
-    return bool(self.migrations[pkg.name].get("module", {}).get("0.0.0"))
+ori_load_information_from_description_file = (
+    module.load_information_from_description_file
+)
 
 
-def update_version(pkg):
-    current_version = pkg.data["version"]
-    pkg.data["version"] = get_new_version(current_version)
+# As odoo only run migration script when the version change
+# We patch odoo when loading the manifest to increment virtually the version when
+# a "pending" migration script exist
+# The version is always set to the number X.X.9999.9.9
+# Note: odoo natively support to process the migration in the directory 0.0.0
+# so we do not need to hack this part
+def load_information_from_description_file(module_name, mod_path=None):
+    info = ori_load_information_from_description_file(module_name, mod_path=mod_path)
+    if not mod_path:
+        mod_path = module.get_module_path(module_name, downloaded=True)
+    if "local-src" in mod_path:
+        if os.path.exists(f"{mod_path}/migrations/0.0.0"):
+            info["version"] = FAKE_VERSION
+    return info
 
-ori_migrate_module = MigrationManager.migrate_module
 
-def migrate_module(self, pkg, stage):
-    if have_pending_migration(self, pkg):
-        update_version(pkg)
-    return ori_migrate_module(self, pkg, stage)
-
-MigrationManager.migrate_module = migrate_module
+module.load_information_from_description_file = load_information_from_description_file
 
 
-# Process before.sql script in custom_all/migrations/{version}/before.sql
+# Process before-XXX.sql script in custom_all/migrations/{version}/
+
+
+def add_sql_migration(todo, version):
+    path = f"{TOP_MODULE_PATH}/migrations/{version}"
+    for filename in os.listdir(path):
+        if filename.startswith("before") and filename[-4:] == ".sql":
+            file_path = f"{path}/{filename}"
+            todo.append((file_path, open(file_path, "r").read()))
+
 
 def get_before_request(cr):
-    cr.execute(
-        "SELECT latest_version FROM ir_module_module WHERE name='custom_all'"
-        )
+    cr.execute("SELECT latest_version FROM ir_module_module WHERE name='custom_all'")
     todo = []
-    current_version = cr.fetchone()
-    if not current_version:
+    db_version = cr.fetchone()
+    if not db_version:
         _logger.error("No version found for custom_all, skip begin script")
-    current_version = current_version[0]
-    migr_path = "/odoo/local-src/custom_all/migrations"
+    db_version = db_version[0]
+    migr_path = f"{TOP_MODULE_PATH}/migrations"
     if os.path.exists(migr_path):
-        for version in os.listdir(migr_path):
-            if version == "0.0.0" or version > current_version:
-                file_path = f"{migr_path}/{version}/before.sql"
-                if os.path.exists(file_path):
-                    todo.append((file_path, open(file_path, "r").read()))
-
+        versions = os.listdir(migr_path)
+        versions.sort()
+        if versions and versions[0] == "0.0.0":
+            # always run pending version add the end
+            versions.append(versions.pop(0))
+        # Run all version that are superior to the db version
+        # And run version of 0.0.0 if FAKE_VERSION is not applied
+        for version in versions:
+            if version > db_version or version == "0.0.0" and FAKE_VERSION > db_version:
+                add_sql_migration(todo, version)
     return todo
 
 
@@ -79,11 +81,14 @@ def new(cls, db_name, force_demo=False, status=None, update_module=False):
     conn = sql_db.db_connect(db_name)
     with conn.cursor() as cr:
         for file_path, requests in get_before_request(cr):
-            _logger.info("Execute before sql request \n===\n%s===\n", requests)
+            _logger.info(
+                "Execute before sql request \n=== %s \n%s===\n", file_path, requests
+            )
             cr.execute(requests)
     return ori_new(
-        db_name, force_demo=force_demo, status=status,
-        update_module=update_module)
+        db_name, force_demo=force_demo, status=status, update_module=update_module
+    )
+
 
 Registry.new = new
 
