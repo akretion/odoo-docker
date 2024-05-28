@@ -5,6 +5,8 @@ python3 -m pip install pipx
 # Install cli for all user
 export PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin
 
+# TODO we should add version to tools so we can increment then
+# need to release ak on pipy first
 pipx install git+https://github.com/akretion/ak --force --include-deps
 pipx inject ak git-aggregator --force
 pipx install git-autoshare
