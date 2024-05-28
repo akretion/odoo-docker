@@ -9,5 +9,5 @@ ADDONS_TEST=$(manifestoo --select-exclude ${EXCLUDE_MODULES:-none} --select-addo
 cd /shared
 unbuffer coverage run --include "/odoo/local-src/*" --branch $(which odoo) --stop-after-init -i ${ADDONS_TEST} --test-enable --workers=0
 ls -alh
-coverage report --precision=2 --skip-empty
-coverage xml --skip-empty
+coverage report -i --precision=2 --skip-empty
+coverage xml -i -o coverage.xml
