@@ -41,3 +41,21 @@ runtests
 ~~~~~~~~~
 
 This script is used to execute the custom test on the ci
+
+
+To Test locally
+===============
+
+Cmd line inside of this current directory
+
+``` docker build -f 17.0-light/Dockerfile -t try-local . ```
+
+Now in the Docker file of your odoo project:
+
+replace
+
+```FROM ghcr.io/akretion/odoo-docker:17.0-light-latest as base ```
+
+by
+
+```FROM try-local:latest as base```
