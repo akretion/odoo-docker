@@ -1,7 +1,6 @@
 FROM ghcr.io/acsone/odoo-bedrock:18.0-py312-noble-latest
 ARG PYTHONBIN=python3.12
-MAINTAINER Akretion
-
+LABEL org.opencontainers.image.authors="Akretion"
 # syntax = docker/dockerfile:1.4
 
 # List from https://github.com/camptocamp/docker-odoo-project/blob/master/16.0/Dockerfile
@@ -35,4 +34,5 @@ RUN pip install --no-cache-dir -r /tmp/base_requirements.txt
 COPY 18.0-light/ak_requirements.txt /tmp/ak_requirements.txt
 RUN pip install --no-cache-dir -r /tmp/ak_requirements.txt
 
+WORKDIR /odoo
 CMD ["odoo"]
