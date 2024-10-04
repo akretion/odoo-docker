@@ -15,7 +15,7 @@ export DB_NAME=${PGDATABASE}
 
 
 if [ -z "$(pip list --format=columns | grep "/odoo/src")" ]; then
-  # The build runs 'pip install -e' on the odoo src, which creates an
+  # The build runs 'pip install -e' on the odoo/src directory, which creates an
   # odoo.egg-info directory *inside /odoo/src*. So when we run a container
   # with a volume shared with the host, we don't have this .egg-info (at least
   # the first time).
@@ -30,7 +30,7 @@ if [ -z "$(pip list --format=columns | grep "/odoo/src")" ]; then
   chown -R $USER_ID:$USER_ID /odoo/src/*.egg-info
 fi
 
-# Do not block the entrypoint if the pip install fail (only local case)
-# so we only exist if fail after the pip install
+# Do not block the entrypoint if pip install fails (only local case)
+# so we only exit in case of a failure after pip install
 set -Eeuo pipefail
 /usr/local/bin/entrypoint.sh "$@"
