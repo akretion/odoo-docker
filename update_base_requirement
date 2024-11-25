@@ -1,6 +1,12 @@
 #!/bin/bash
 set -Eeuo pipefail
 
+rm -rf 18.0/base_requirements.txt
+wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/18.0/base_requirements.txt -O 18.0/base_requirements.txt
+
+rm -rf 17.0/base_requirements.txt
+wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/17.0/base_requirements.txt -O 17.0/base_requirements.txt
+
 rm -rf 16.0/base_requirements.txt
 wget https://raw.githubusercontent.com/camptocamp/docker-odoo-project/master/16.0/base_requirements.txt -O 16.0/base_requirements.txt
 

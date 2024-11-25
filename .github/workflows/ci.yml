@@ -18,7 +18,9 @@ jobs:
           - ODOOVERSION: "15.0"
           - ODOOVERSION: "16.0"
           - ODOOVERSION: "16.0-light"
+          - ODOOVERSION: "17.0"
           - ODOOVERSION: "17.0-light"
+          - ODOOVERSION: "18.0"
           - ODOOVERSION: "18.0-light"
     steps:
       - uses: actions/checkout@v2
