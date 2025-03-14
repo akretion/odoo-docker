@@ -37,6 +37,7 @@ jobs:
         with:
           context: .
           pull: true
+          no-cache: true # some dependency are not pin so we need to allway update we should improve this
           file: ${{ matrix.ODOOVERSION }}/Dockerfile
           tags: |
             ghcr.io/${{ github.repository }}:${{ matrix.ODOOVERSION }}-latest
