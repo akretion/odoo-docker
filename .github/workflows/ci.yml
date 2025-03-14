@@ -36,6 +36,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          pull: true
           file: ${{ matrix.ODOOVERSION }}/Dockerfile
           tags: |
             ghcr.io/${{ github.repository }}:${{ matrix.ODOOVERSION }}-latest
