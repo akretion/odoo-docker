@@ -1,5 +1,5 @@
 FROM ghcr.io/acsone/odoo-bedrock:13.0-py37-latest
-MAINTAINER Akretion
+LABEL maintainer=Akretion
 
 # syntax = docker/dockerfile:1.4
 
