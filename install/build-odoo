@@ -8,17 +8,16 @@ ak build -c odoo-spec.yaml -f odoo-frozen.yaml
 # Remove useless git directory
 rm -rf /odoo/src/.git
 
-# Keep only wanted odoo module if defined
+# First, we eventually keep only the wanted odoo modules
 if [ -z "$(ls -A /odoo/links)" ]; then
-  echo "No module specify, display all"
+  echo "No addons set specified, keeping all addons"
 else
   cp -r -L /odoo/links /odoo/odoo-addons
   rm -rf /odoo/src/addons/*
   mv /odoo/odoo-addons/* /odoo/src/addons
 fi
 
-# Secondly we remove unwanted lang
-if [[ BUILD_RESTRICT_LANG ]]
-then
+# Second, we remove unwanted lang
+if [[ -n "$BUILD_RESTRICT_LANG" ]]; then
     find /odoo/src/ -name *.po ! -name $BUILD_RESTRICT_LANG -type f -exec rm -v {} +
 fi
