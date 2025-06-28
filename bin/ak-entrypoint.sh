@@ -3,9 +3,11 @@
 USER_ID=${LOCAL_USER_ID:-999}
 
 
-# When using docky open the entrypoint is not run
-# this mean we do not have the variable mapping from odoo db variable => postgres variable
-# as we need to have the postgres always set we use it in docker-compose file and map them to odoo variable
+# When using docky open the bedrock entrypoint is not run
+# and so the PG variable are not initialized with the odoo variable
+# to have a working postgresql-client working without setting odoo and PG variable
+# it simplier to use native PG variable and map them to odoo
+# So in docker-compose.yml only set the PG variable and it will work
 
 export DB_HOST=${PGHOST}
 export DB_PORT=${PGPORT:-5432}
