@@ -1,5 +1,5 @@
 # python 3.9 is the default used in acsone
-FROM ghcr.io/acsone/odoo-bedrock:14.0-py39-latest
+FROM ghcr.io/acsone/odoo-bedrock:14.0-py39-jammy-latest
 ARG PYTHONBIN=python3.9
 MAINTAINER Akretion
 
