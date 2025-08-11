@@ -1,4 +1,4 @@
-FROM ghcr.io/acsone/odoo-bedrock:15.0-py38-latest
+FROM ghcr.io/acsone/odoo-bedrock:15.0-py38-jammy-latest
 MAINTAINER Akretion
 
 # syntax = docker/dockerfile:1.4
