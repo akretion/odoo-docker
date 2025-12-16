@@ -1,3 +1,4 @@
+* 12/12/2025 Add 19.0-light
 * 16/06/2025 17.0-light is now python 3.12
 * 26/09/2024 Add 18.0-light
 * 10/07/2023 *Major change* v14 is now python 3.8

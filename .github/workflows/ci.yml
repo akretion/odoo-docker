@@ -22,6 +22,7 @@ jobs:
           - ODOOVERSION: "17.0-light"
           - ODOOVERSION: "18.0"
           - ODOOVERSION: "18.0-light"
+          - ODOOVERSION: "19.0-light"
     steps:
       - uses: actions/checkout@v2
       - name: Set up Docker Buildx
