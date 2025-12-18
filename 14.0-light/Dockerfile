@@ -36,4 +36,5 @@ RUN pip install --no-cache-dir -r /tmp/base_requirements.txt
 COPY 14.0-light/ak_requirements.txt /tmp/ak_requirements.txt
 RUN pip install --no-cache-dir -r /tmp/ak_requirements.txt
 
+WORKDIR /odoo
 CMD ["odoo"]
