@@ -1,6 +1,7 @@
 FROM ghcr.io/acsone/odoo-bedrock:17.0-py312-jammy-latest
 ARG PYTHONBIN=python3.12
 LABEL org.opencontainers.image.authors="Akretion"
+LABEL org.opencontainers.image.description="17.0-py312-jammy-latest"
 
 # syntax = docker/dockerfile:1.4
 
