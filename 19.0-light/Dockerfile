@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.authors="Akretion"
 # syntax = docker/dockerfile:1.4
 
 # List from https://github.com/camptocamp/docker-odoo-project/blob/master/19.0/Dockerfile
-ENV BUILD_PACKAGE=\
+ENV BUILD_PACKAGE="\
     build-essential \
     gcc \
     ${PYTHONBIN}-dev \
@@ -23,7 +23,7 @@ ENV BUILD_PACKAGE=\
 # Additionnal dep from Ak
     po4a \
     libpq-dev \
-    postgresql-client
+    postgresql-client"
 
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update \
