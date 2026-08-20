@@ -33,4 +33,4 @@ fi
 # Do not block the entrypoint if the pip install fail (only local case)
 # so we only exist if fail after the pip install
 set -Eeuo pipefail
-/usr/local/bin/entrypoint.sh "$@"
+exec /usr/local/bin/entrypoint.sh "$@"
