@@ -29,6 +29,7 @@ jobs:
           - "18.0"
           - "18.0-light"
           - "19.0-light"
+          - "20.0-light"
     steps:
       - uses: actions/checkout@v5
       - name: Set up Docker Buildx
