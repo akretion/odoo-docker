@@ -70,6 +70,17 @@ simplejson==3.20.1
 #-e git+https://github.com/camptocamp/marabunta@master#egg=marabunta
 #-e git+https://github.com/camptocamp/anthem@master#egg=anthem
 
+# test / lint
+# those libs and their dependencies are unpinned
+# to always test with the last version of it
+flake8
+pytest
+pluggy
+coverage
+pytest-odoo
+pytest-cov
+watchdog
+
 # Library dependency
 argh==0.31.3
 atomicwrites==1.4.1
