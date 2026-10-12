@@ -125,3 +125,16 @@ webencodings==0.6.1     # dep. of html5lib
 # typer==0.27.2           # dep. of confidoo
 # unicodecsv==0.14.1      # dep. of anthem
 # [/ak:edit]
+
+# [ak: edit]
+# test / lint
+# those libs and their dependencies are unpinned
+# to always test with the last version of it
+flake8
+pytest
+pluggy
+coverage
+pytest-odoo
+pytest-cov
+watchdog
+# [/ak:edit]
