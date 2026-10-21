@@ -1,3 +1,4 @@
+* 19/10/2026 Add 20.0-light
 * 12/12/2025 Add 19.0-light
 * 16/06/2025 17.0-light is now python 3.12
 * 26/09/2024 Add 18.0-light

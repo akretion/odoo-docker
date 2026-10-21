@@ -1,6 +1,6 @@
-FROM ghcr.io/acsone/odoo-bedrock:19.0-py313-noble-latest
+FROM ghcr.io/acsone/odoo-bedrock:20.0-py314-resolute-latest
 # TODO change when they publish 20
-ARG PYTHONBIN=python3.13
+ARG PYTHONBIN=python3.14
 LABEL org.opencontainers.image.authors="Akretion"
 # syntax = docker/dockerfile:1.4
 
