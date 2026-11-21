@@ -36,5 +36,18 @@ RUN pip install --no-cache-dir -r /tmp/base_requirements.txt
 COPY 20.0-light/ak_requirements.txt /tmp/ak_requirements.txt
 RUN pip install --no-cache-dir -r /tmp/ak_requirements.txt
 
+# /home/odoo is created at runtime by the entrypoint (useradd -m)
+# so shell config goes in /etc and history in the data volume
+COPY install/odoo_shell_history.py /tmp/odoo_shell_history.py
+COPY install/odoo_completion.bash /etc/bash_completion.d/odoo
+RUN mkdir -p /data/odoo/history \
+    && SITE=$(python -c "import sysconfig; print(sysconfig.get_path('purelib'))") \
+    && mv /tmp/odoo_shell_history.py "$SITE/" \
+    && echo "import odoo_shell_history" > "$SITE/odoo_shell_history.pth" \
+    && echo "[ -f /etc/bash_completion.d/odoo ] && . /etc/bash_completion.d/odoo" >> /etc/bash.bashrc
+ENV PYTHON_HISTORY=/data/odoo/history/python_history \
+    IPYTHONDIR=/data/odoo/history/ipython \
+    HISTFILE=/data/odoo/history/bash_history
+
 WORKDIR /odoo
 CMD ["odoo", "server"]
