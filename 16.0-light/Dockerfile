@@ -30,7 +30,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update \
     && apt-get install -y --no-install-recommends $BUILD_PACKAGE
 
-COPY 16.0/base_requirements.txt /tmp/base_requirements.txt
+COPY 16.0-light/base_requirements.txt /tmp/base_requirements.txt
 RUN pip install --no-cache-dir -r /tmp/base_requirements.txt
 
 COPY 16.0-light/ak_requirements.txt /tmp/ak_requirements.txt

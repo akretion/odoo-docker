@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "This script don't work. URL have changed"
+echo " exlude marabunta and its dependency (see [ak edit])"
+exit -1
 set -Eeuo pipefail
 
 rm -rf 18.0/base_requirements.txt
