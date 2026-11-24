@@ -19,6 +19,7 @@ ENV BUILD_PACKAGE="\
     libpng-dev \
     zlib1g-dev \
     git \
+    libcairo2-dev \
 # Additionnal dep from Ak
     po4a \
     libpq-dev \
