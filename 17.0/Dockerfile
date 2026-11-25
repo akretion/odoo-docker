@@ -1,6 +1,6 @@
 # python 3.10 is the default used in acsone
-FROM ghcr.io/acsone/odoo-bedrock:17.0-py311-jammy-latest
-ARG PYTHONBIN=python3.11
+FROM ghcr.io/acsone/odoo-bedrock:17.0-py312-jammy-latest
+ARG PYTHONBIN=python3.12
 MAINTAINER Akretion
 
 # syntax = docker/dockerfile:1.4
